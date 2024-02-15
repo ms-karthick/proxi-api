@@ -8,7 +8,7 @@ module.exports = app => {
   
     router.get("/", orderController.findAll);
   
-    router.get("/find-data-by-user/:userId", orderController.findByUserId);
+    router.get("/find-data-by-user/:user_id", orderController.findByUserId);
 
     router.get("/find-data-by-product/:productId", orderController.findByProductId);
     

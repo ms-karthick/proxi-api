@@ -1,7 +1,7 @@
 const { exit } = require("process");
 const db = require("../models");
 const Order = db.order;
-
+const User = db.user;
 
 
 exports.create = (req, res) => {
@@ -32,23 +32,27 @@ exports.create = (req, res) => {
 };
 
 
-exports.findByUserId = (req, res) => {
-  const { userId } = req.params; 
+exports.findByUserId = async (req, res) => {
+  const { user_id } = req.params; 
   
-  db.order.findAll({
-    where: { user_id: userId }
+ const user = await User.findByPk(user_id, {
+    include:[Order]
   })
-    .then(user => {
+
+  // db.order.findAll({
+  //   where: { user_id: userId }
+  // })
+    // .then(user => {
       
       if (user) {
-        res.send(user); // User object with associated orders
+        res.status(200).json({data: user }); // User object with associated orders
       } else {
         res.status(404).send({ message: "User not found" });
       }
-    })
-    .catch(error => {
-      res.status(500).send({ message: error.message || "Some error occurred while retrieving the user and orders." });
-    });
+    // })
+    // .catch(error => {
+      // res.status(500).send({ message: error.message || "Some error occurred while retrieving the user and orders." });
+    // });
 };
 
 

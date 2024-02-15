@@ -1,4 +1,11 @@
 module.exports = (sequelize, Sequelize, DataTypes) => {
+  const Order = sequelize.define('orders', {
+    qty: DataTypes.INTEGER,
+    total_amount: DataTypes.DECIMAL,
+    // Other order attributes
+  });
+
+
     const User = sequelize.define(
       "users", // Model name
       {
@@ -29,6 +36,8 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         updatedAt: "updated_at"
       }
     );
-  
+
+      User.hasMany(Order, {foreignKey: 'user_id'});
+
     return User;
   };

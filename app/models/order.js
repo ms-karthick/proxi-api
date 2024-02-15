@@ -1,21 +1,5 @@
 module.exports = (sequelize, Sequelize, DataTypes) => {
 
-  // User model
-  const User = sequelize.define('users', {
-    name: DataTypes.STRING,
-    // Other user attributes
-  });
-
-  // Order model
-  const Order = sequelize.define('orders', {
-    qty: DataTypes.INTEGER,
-    total_amount: DataTypes.DECIMAL,
-    // Other order attributes
-  });
-
-  User.hasMany(Order);
-  Order.belongsTo(User);
-
   const OrderModel = sequelize.define(
     "orders", // Model name
     {

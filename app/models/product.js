@@ -34,5 +34,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       }
     );
   
+    Product.hasMany(Order, {foreignKey: 'user_id'});
     return Product;
   };
